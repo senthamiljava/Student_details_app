@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1" />
+<title>Skills</title>
+<script src="../jquery-3.2.1.js"> </script>
+<script>
+
+$(document).ready(function(){
+	console.log("Jquery Loaded");
+	
+	/* $("#updateSkill").click( function(e) {
+		e.preventDefault();
+		var scale = $("#scale").val();
+		var skillId = $(this).closest('tr').attr('id');
+		alert(scale + "-" + skillId );
+		console.log("Update Button Clicked" + scale + "-" + skillId);
+	}); */
+});
+function updateSkill(skillId){
+	
+	var scale = $("#scale_" + skillId ).val();
+	console.log(skillId  + "-" + scale );
+}
+</script>
+</head>
+<body>
+	<h2>List of Skill</h2>
+	
+		<table>
+			<thead>
+				<tr>
+					<th>Sno</th>
+					<th>student_id</th>
+					<th>skill</th>
+					<th>scale</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="s,index : ${skill_list}" th:id="${s.skill.id}">
+				    <td th:text="${s.skill.id}"></td>
+				    <c:set var="skill_id" scope="request" value="${s.skill.id}" />
+					<td th:text="${s.student.id}"></td>
+					<td th:text="${s.skill.name}"></td>
+					<td><select th:id = "'scale_'+ ${s.skill.id}" onchange="updateSkill(this.value)">
+							<option value="Y">YET TO LEARN</option>
+							<option value="B">BEGINNER</option>
+							<option value="I">INTERMEDIATE</option>
+							<option value="E">EXPERT</option>
+					</select></td>
+					<td><button th:onclick="'updateSkill(' + ${s.skill.id} +')'" >Update</button></td>
+					
+				</tr>
+				<tr>
+					<td><br></br></td>
+				</tr>
+				<tr>
+					<td><br></br></td>
+				</tr>
+				<tr>
+				</tr>
+			</tbody>
+		</table>
+
+</body>
+</html>
